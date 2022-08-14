@@ -1,0 +1,15 @@
+<%- include("header"); -%>
+
+<h1>Home</h1>
+<p><%=content%></p>
+
+<%for(let i=0;i<postTitleDisplay.length;i++){%>
+    <h2><%= postTitleDisplay[i] %></h2>
+
+    <p><%=postItemDisplay[i].substring(0, 100)%> ... <a href="/post/<%=postTitleDisplay[i]%>">Read More</a></p>
+     
+<%}%>
+
+
+
+<%- include('footer'); -%>
