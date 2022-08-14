@@ -48,13 +48,15 @@ app.get("/compose",function(req,res){
   res.render("compose");
 });
 
-app.get("/post/:title",function(req,res){
-  const requestPost=_.lowerCase(req.params.title);
-  for(let i=0;i<postItem.length;i++) {
-    if(_.lowerCase(postItem[i]).toLowerCase()===requestPost){
-      res.render("post",{postTitleDisplay:postItem[i],postItemDisplay:postItemList[i]});
-    }
-  };
+app.get("/post/:postId",function(req,res){
+  const requestPostid=req.params.postId;
+  Post.findOne({_id:requestPostid},function (err,post){
+    res.render("post",{title:post.title,content:post.content});
+  });
+  // for(let i=0;i<postItem.length;i++) {
+  //   if(_.lowerCase(postItem[i]).toLowerCase()===requestPost){
+  //   }
+  // };
   
 });
 
