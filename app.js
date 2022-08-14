@@ -30,7 +30,10 @@ const Post=mongoose.model("Post",postSchema);
 let posts=[];
 
 app.get("/",function(req,res) {
-  res.render('home',{content:homeStartingContent,postTitleDisplay:postItem,postItemDisplay:postItemList});
+  Post.find({},function (err,posts){
+    res.render('home',{content:homeStartingContent,posts:posts});
+    
+  });
 });
 
 app.get("/about",function(req,res){
@@ -56,8 +59,6 @@ app.get("/post/:title",function(req,res){
 });
 
 app.post("/compose",function(req,res){
-  // postItem.push(req.body.postTitle);
-  // postItemList.push(req.body.postItem);
   const post=new Post({title:req.body.postTitle,content:req.body.postItem});
   post.save();
   res.redirect("/");
